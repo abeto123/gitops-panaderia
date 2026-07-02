@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: hexagonal-api
+  template:
+    metadata:
+      labels:
+        app: hexagonal-api
+    spec:
+      containers:
+      - name: adapter-rest
+        image: ecommerce-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: hexagonal-config
