@@ -19,13 +19,16 @@ spec:
         image: mysql:8.0
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "root123"
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
         - name: MYSQL_DATABASE
-          value: "panaderia"
+          value: "PanaderiaBarriosDB"
         ports:
         - containerPort: 3306
         readinessProbe:
           exec:
-            command: ["mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+            command: ["mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$(MYSQL_ROOT_PASSWORD)"]
           initialDelaySeconds: 20
           periodSeconds: 10
