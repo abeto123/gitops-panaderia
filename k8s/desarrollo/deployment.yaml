@@ -23,6 +23,12 @@ spec:
         envFrom:
         - configMapRef:
             name: hexagonal-config
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
         livenessProbe:
           httpGet:
             path: /
