@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: adapter-rest
-        image: albeert151/panaderia-app:v1.0.5
+        image: albeert151/panaderia-app:v1.0.6
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
